@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus I: Interactive Mastery Project</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.0/math.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>ریاضی1:استاد ملک / Calculus 1: prof malek</h1>
+            <p>پروژه پایانی ریاضی 1 / Final Project in Calculus 1</p>
+            <img class="logo" alt="" src="https://math.kntu.ac.ir/documents/6013311/6013315/MathLogo.png/536fe57a-40d6-654e-d35a-946418c5ce72?t=1759736678461">
+        </div>
+    </header>
+
+    <div class="layout">
+        <nav class="sidebar">
+            <ul>
+                <li class="nav-item active" data-tab="complex">Complex Numbers
+                اعداد مختلط</li>
+                <li class="nav-item" data-tab="polar">Polar Coordinates
+                نمودار قطبی</li>
+                <li class="nav-item" data-tab="limits">Limits & Continuity
+                حد و پیوستگی</li>
+                <li class="nav-item" data-tab="derivatives">Derivatives & Rates
+                مشتقات و نرخ تغییر</li>
+                <li class="nav-item" data-tab="integrals">Integrals & Area
+                انتگرال و مساحت</li>
+            </ul>
+        </nav>
+
+        <main id="content-area">
+            
+            <section id="complex" class="module active">
+                <h2>The Complex Plane & Euler's Form
+                مدل مختلط و اویلری</h2>
+                <p class="intro-text">Understanding numbers beyond the real line. Visualize the connection between Cartesian $(a, b)$ and Polar $(r, \theta)$ forms.</p>
+                
+                <div class="control-panel">
+                    <div class="input-group">
+                        <label>Real Part ($a$) 
+                        بخش حقیقی</label>
+                        <input type="number" id="complex-real" value="3" step="0.5">
+                    </div>
+                    <div class="input-group">
+                        <label>Imaginary Part ($b$) 
+                        بخش مختلط</label>
+                        <input type="number" id="complex-imag" value="4" step="0.5">
+                    </div>
+                </div>
+
+                <div class="visualization-grid">
+                    <div id="complex-plot" class="graph-container"></div>
+                    <div class="math-explanation">
+                        <h3>Mathematical Analysis 
+                        انالیز ریاضی</h3>
+                        <div id="complex-output"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="polar" class="module">
+                <h2>Polar Coordinates & Curves 
+                نمودار قطبی و منحنی‌ها</h2>
+                <p class="intro-text">Exploring functions defined by radius $r$ and angle $\theta$. Visualizing periodicity and symmetry.</p>
+                
+                <div class="control-panel">
+                    <div class="input-group">
+                        <label>Polar Function $r(\theta) =$
+                        تابع قطبی</label>
+                        <input type="text" id="polar-func" value="2 * cos(4 * theta)">
+                        <span class="hint">Try: <code>1 + sin(theta)</code> or <code>theta</code></span>
+                    </div>
+                </div>
+
+                <div class="visualization-grid">
+                    <div id="polar-plot" class="graph-container"></div>
+                    <div class="math-explanation">
+                        <h3>Properties 
+                        خصوصیات</h3>
+                        <div id="polar-output"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="limits" class="module">
+                <h2>Limits & Continuity 
+                حد و پیوستگی</h2>
+                <p class="intro-text">The foundational concept of Calculus. Exploring behavior as $x$ approaches a value.
+                </p>
+                
+                <div class="control-panel">
+                    <div class="input-group">
+                        <label>Function $f(x) =$
+                        تابع</label>
+                        <input type="text" id="limit-func" value="(x^2 - 1)/(x - 1)">
+                    </div>
+                    <div class="input-group">
+                        <label>Approach $x \to$
+                        میل می‌کند به:</label>
+                        <input type="number" id="limit-target" value="1">
+                    </div>
+                </div>
+
+                <div class="visualization-grid">
+                    <div id="limit-plot" class="graph-container"></div>
+                    <div class="math-explanation">
+                        <h3>Numerical Evidence 
+                        اثبات عددی</h3>
+                        <table class="data-table" id="limit-table">
+                            <thead><tr><th>$x$</th><th>$f(x)$</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="limit-result"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="derivatives" class="module">
+                <h2>Derivatives: The Rate of Change 
+                مشتق: نرخ تغییر</h2>
+                <p class="intro-text">Instantaneous rate of change visualized as the slope of the tangent line.
+                نرخ تغییر لحظه‌ای که به‌صورت شیب خط مماس نمایش داده می‌شود.
+</p>
+                
+                <div class="control-panel">
+                    <div class="input-group">
+                        <label>Function $f(x) =$ 
+                        تابع</label>
+                        <input type="text" id="deriv-func" value="x^2 + 2*x">
+                    </div>
+                    <div class="input-group">
+                        <label>Evaluate at $x =$ 
+                        در X ارزیابی میشود</label>
+                        <input type="range" id="deriv-x" min="-5" max="5" step="0.1" value="1">
+                        <span id="deriv-x-val">1</span>
+                    </div>
+                </div>
+
+                <div class="visualization-grid">
+                    <div id="deriv-plot" class="graph-container"></div>
+                    <div class="math-explanation">
+                        <h3>Symbolic Differentiation 
+                        مشتق نمادین</h3>
+                        <div id="deriv-output"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="integrals" class="module">
+                <h2>Integrals: Accumulation & Area 
+                انتگرال: جمع‌آوری و مساحت</h2>
+                <p class="intro-text">The Fundamental Theorem of Calculus linking area under the curve to antiderivatives.
+                قضیهٔ بنیادی حسابان که مساحت زیر منحنی را به پاد‌مشتق‌ها مرتبط می‌کند.
+</p>
+                
+                <div class="control-panel">
+                    <div class="input-group">
+                        <label>Function $f(x) =$ 
+                        تابع</label>
+                        <input type="text" id="int-func" value="sin(x) + 2">
+                    </div>
+                    <div class="input-group">
+                        <label>Lower Bound $a$ 
+                        کران پایین</label>
+                        <input type="number" id="int-a" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Upper Bound $b$ 
+                        کران بالا</label>
+                        <input type="number" id="int-b" value="3.14">
+                    </div>
+                </div>
+
+                <div class="visualization-grid">
+                    <div id="int-plot" class="graph-container"></div>
+                    <div class="math-explanation">
+                        <h3>Riemann Sum Approximation 
+                        تقریب مجموع ریمان</h3>
+                        <div id="int-output"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        Final Project in Calculus 1
+        Created by: [Sina Shiri]
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
