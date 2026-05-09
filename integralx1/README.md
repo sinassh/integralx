@@ -1,7 +1,6 @@
-# ریاضی1:استاد ملک
+# ریاضی1
 
 **Student:** [sina shiri ]  
-**Course:** ریاضی1 (MATH 4041)  
 **Submission Date:** [2/5/2026]
 
 ## 1. Project Overview
