@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ماشین‌حساب پیشرفته انتگرال</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- استفاده از Math.js برای پارس امن. در صورت لود نشدن، از Fallback داخلی استفاده می‌شود -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <div class="container app-header__inner">
+            <h1 class="app-header__title">ماشین‌حساب پیشرفته انتگرال</h1>
+            <div class="app-header__actions">
+                <button class="btn btn--icon" id="themeToggle" aria-label="تغییر پوسته">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container app-main">
+        <section class="panel panel--input" aria-labelledby="input-panel-title">
+            <h2 id="input-panel-title" class="sr-only">تنظیمات محاسبه</h2>
+            
+            <div class="form-group">
+                <label for="functionInput" class="form-label">تابع $f(x)$</label>
+                <div class="input-wrapper">
+                    <span class="input-prefix">$\int$</span>
+                    <input type="text" id="functionInput" class="form-input" placeholder="x^2 + sin(x)" autocomplete="off">
+                    <span class="input-suffix">$dx$</span>
+                </div>
+            </div>
+
+            <div class="form-group form-group--inline">
+                <label class="radio-label">
+                    <input type="radio" name="calcType" value="definite" checked>
+                    <span class="radio-text">معین (عددی)</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="calcType" value="indefinite">
+                    <span class="radio-text">نامعین (نمادین)</span>
+                </label>
+            </div>
+
+            <div class="grid-2-cols" id="definiteParams">
+                <div class="form-group">
+                    <label for="lowerBound" class="form-label">کران پایین $(a)$</label>
+                    <input type="number" id="lowerBound" class="form-input" value="0" step="any">
+                </div>
+                <div class="form-group">
+                    <label for="upperBound" class="form-label">کران بالا $(b)$</label>
+                    <input type="number" id="upperBound" class="form-input" value="1" step="any">
+                </div>
+                <div class="form-group">
+                    <label for="methodSelect" class="form-label">الگوریتم عددی</label>
+                    <select id="methodSelect" class="form-select">
+                        <option value="adaptive">Adaptive Simpson (دقیق و پویا)</option>
+                        <option value="romberg">Romberg (نرم و سریع)</option>
+                        <option value="simpson">Simpson (کلاسیک)</option>
+                        <option value="trapezoidal">Trapezoidal (ذوزنقه)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="precisionInput" class="form-label">تلرانس / مراحل</label>
+                    <input type="number" id="precisionInput" class="form-input" value="1000" min="10" max="100000">
+                </div>
+            </div>
+
+            <div class="panel__actions">
+                <button id="calculateBtn" class="btn btn--primary">محاسبه و رسم</button>
+                <button id="clearBtn" class="btn btn--secondary">پاک‌کردن</button>
+            </div>
+
+            <div id="errorMessage" class="alert alert--error hidden" role="alert"></div>
+        </section>
+
+        <section class="panel panel--output" aria-labelledby="output-panel-title">
+            <h2 id="output-panel-title" class="sr-only">نتایج و نمودار</h2>
+            
+            <div id="resultCard" class="result-card hidden" aria-live="polite">
+                <div class="result-card__formula" id="formulaDisplay"></div>
+                <div class="result-card__value" id="resultDisplay"></div>
+                <div class="result-card__meta" id="performanceDisplay"></div>
+            </div>
+
+            <div class="graph-container">
+                <div class="graph-toolbar">
+                    <button class="btn btn--small" id="resetZoomBtn">مرکز نمایی</button>
+                    <button class="btn btn--small" id="exportGraphBtn">خروجی PNG</button>
+                </div>
+                <canvas id="graphCanvas" class="graph-canvas" aria-label="نمودار تابع"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
