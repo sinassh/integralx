@@ -1,8 +1,3 @@
-/**
- * CALCULUS I MASTER PROJECT
- * Main Controller & Mathematics Logic
- */
-
 // --- 1. Math Engine (Encapsulates Math.js logic) ---
 class CalculusEngine {
     constructor() {
