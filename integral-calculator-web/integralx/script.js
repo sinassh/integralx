@@ -1,8 +1,3 @@
-/**
- * Integral Calculator - Advanced Refactored Version
- * Architecture: Modules (MathEngine, GraphEngine, AppController)
- */
-
 // 1. MATH ENGINE
 const MathEngine = {
     compile(expr) {
